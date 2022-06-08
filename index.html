@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+            <title>Password Generator</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="style.css">
+        </head>
+<body onLoad="generatePassword()">
+        <h1 id="text"></h1>
+        <button id="button">Generate</button>
+        <button id="btn2">Copy</button>
+        <br></br>
+        <button id="save">Save password</button>
+        <button id="load">Load passwords</button>
+        <p id="d"></p>
+        <p id="display"></p>
+</body>
+
+<script>
+const text = document.getElementById("text");
+const display = document.getElementById("display");
+const button = document.getElementById("button");
+const btn2 = document.getElementById("btn2");
+const save = document.getElementById("save");
+const load = document.getElementById("load");
+const d = document.getElementById("d");
+
+function generatePassword() {
+    var password = "";
+        var string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_=[]{}|;:,./<>?";
+        // scramble the string
+        for (var i = 0; i < 10; i++) {
+            var random = Math.floor(Math.random() * string.length);
+            password += string.substring(random, random + 1);
+        }
+
+        for (var i = 0; i < 20; i++)
+            password += string.charAt(Math.floor(Math.random() * string.length));
+        text.innerHTML = password;
+}
+
+function Copy() {
+    var range = document.createRange();
+        range.selectNode(text);
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+
+        // create popup message
+        const popup = document.createElement("div");
+        popup.classList.add("popup");
+        popup.innerHTML = "Copied to clipboard";
+        document.body.appendChild(popup);
+        setTimeout(function() {
+            popup.remove();
+        }, 3000);
+    }
+
+    load.addEventListener("click", function() {
+        // load array from local storage
+        var passwords = JSON.parse(localStorage.getItem("passwords"));
+        // separate each password to its own line
+        d.innerHTML = "Password(s): ";
+        var displayText = "";
+        for (var i = 0; i < passwords.length; i++) {
+            displayText += passwords[i] + "<br>";
+        }
+        display.innerHTML = displayText;
+    });
+
+    save.addEventListener("click", function() {
+        var password = text.innerHTML;
+        // add password to local storage array
+        var passwords = JSON.parse(localStorage.getItem("passwords")) || [];
+        passwords.push(password);
+        localStorage.setItem("passwords", JSON.stringify(passwords));
+        
+        // create popup message
+        const popup = document.createElement("div");
+        popup.classList.add("popup");
+        popup.innerHTML = "Saved to local storage";
+        document.body.appendChild(popup);
+        setTimeout(function() {
+            popup.remove();
+        }, 3000);
+    });
+
+    btn2.addEventListener("click", function() {
+        Copy();
+    });
+
+    button.addEventListener("click", function() {
+        generatePassword();
+    });   
+</script>
+
+</html>

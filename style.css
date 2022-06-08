@@ -1,0 +1,69 @@
+/* garbage code by me */
+body {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; 
+    font-size: xx-large; 
+    color: black;
+    font-weight: bold;
+    gap: 250px;
+    background-color: rgb(255, 162, 48);
+    line-height: 1.0;
+
+}
+
+p {
+    text-align: left;
+}
+
+.popup {
+    color: black;
+    background-color: red;
+}
+
+#display {
+    margin-bottom: 5px;
+}
+
+@media only screen and (max-width: 480px) {
+    body {
+        font-size: x-large;
+    }
+    h1 {
+        overflow: auto;
+    }
+    ::-webkit-scrollbar {
+        width: 5px;
+        color: rgb(252, 159, 39);
+    }
+    button {
+        margin-bottom: 10px;
+    }
+    #display {
+        overflow: auto;
+    }
+}   
+
+button {
+    text-align: center;
+    font-weight: bold;
+    padding: 15px;
+    background-color: rgb(247, 140, 0);
+    cursor: pointer;
+    line-height: 1.0;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: xx-large;
+    border-radius: 16px;
+    border: 3px solid black;
+    outline: none;
+    box-shadow: 0 4px #999;
+}
+
+button:hover {
+    background-color: rgb(252, 159, 39);
+    transition: 0.8;
+}
+
+button:active {
+  background-color: rgb(253, 167, 54);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
